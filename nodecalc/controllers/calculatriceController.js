@@ -8,7 +8,7 @@ controller.formulaire = (req, res) => {
 };
 
 controller.list = (req, res) => {
-  MongoClient.connect(url, function(err, db) {
+  MongoClient.connect(url, {useUnifiedTopology: true, useNewUrlParser: true}, function(err, db) {
   if (err) throw err;
   var dbo = db.db("calculatrice");
   dbo.collection("param").find({}).toArray(function(err, result) {
@@ -22,7 +22,7 @@ controller.list = (req, res) => {
 };
 
 controller.save = (req, res) => {
-  MongoClient.connect(url, function(err, db) {
+  MongoClient.connect(url, {useUnifiedTopology: true, useNewUrlParser: true}, function(err, db) {
   if (err) throw err;
   var dbo = db.db("calculatrice");
   var myobj = req.body;
@@ -36,11 +36,11 @@ controller.save = (req, res) => {
 };
 
 controller.calculer = (req, res) => {
-  MongoClient.connect(url, function(err, db) {
+  MongoClient.connect(url, {useUnifiedTopology: true, useNewUrlParser: true}, function(err, db) {
   if (err) throw err;
   var dbo = db.db("calculatrice");
-  var myquery = { _id: "5d9b0b7d22da7d25784de10e" };
-  var newvalues = { $set: {nombre1: "Mickey", nombre2: "Canyon 123" } };
+  var myquery = req.params._id;
+  var newvalues = { $set: {resulat: resultat } };
   dbo.collection("param").updateOne(myquery, newvalues, function(err, res) {
     if (err) throw err;
     console.log("1 document inserted");
@@ -86,11 +86,11 @@ controller.update = (req, res) => {
 };
 
 controller.delete = (req, res) => {
-  MongoClient.connect(url, function(err, db) {
+  MongoClient.connect(url, {useUnifiedTopology: true, useNewUrlParser: true}, function(err, db) {
   if (err) throw err;
-  var dbo = db.db("biblio");
-  var { myquery } = req.params;
-  dbo.collection("livres").deleteOne(myquery, function(err, obj) {
+  var dbo = db.db("calculatrice");
+  var myquery = req.params._id;
+  dbo.collection("param").deleteOne(myquery, function(err, obj) {
     if (err) throw err;
     console.log("1 document deleted");
     db.close();
