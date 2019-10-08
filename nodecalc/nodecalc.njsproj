@@ -35,6 +35,9 @@
     <Compile Include="app.js" />
     <Compile Include="routes\form.js" />
     <Compile Include="routes\index.js" />
+    <Compile Include="routes\resultat.js">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="routes\users.js" />
     <Content Include="package.json" />
     <Content Include="public\stylesheets\main.css" />
@@ -42,6 +45,9 @@
     <Content Include="views\error.ejs" />
     <Content Include="views\form.ejs" />
     <Content Include="views\index.ejs" />
+    <Content Include="views\resultat.ejs">
+      <SubType>Code</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="public\" />

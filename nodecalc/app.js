@@ -10,6 +10,8 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var form = require('./routes/form');
+var calculatrice = require('./routes/calculatrice');
+var resultat = require('./routes/resultat');
 
 var app = express();
 
@@ -24,10 +26,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico'))); // Active la favicon indiquée
 
 app.use('/', routes);
 app.use('/users', users);
 app.use('/form', form);
+app.use('/calculatrice', calculatrice);
+app.use('/resultat', resultat);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -61,6 +66,15 @@ app.use(function (err, req, res, next) {
 });
 
 app.set('port', process.env.PORT || 3000);
+
+// addition
+//app.use(function (req, res) {
+//    var addition = Number(req.body.nun) + Number(req.body.n2);
+//    //var resultat = addition.toString();
+//    res.render('resultat', {
+//        result: 'addition'
+//    });
+//});
 
 var server = app.listen(app.get('port'), function () {
     debug('Express server listening on port ' + server.address().port);

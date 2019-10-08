@@ -1,24 +1,39 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <title>Titre de la page</title>
-  <link rel="stylesheet" href="/stylesheets/main.css">
-  <script src="script.js"></script>
+ <% include partials/head %> 
 </head>
 <body>
-  <form action="/form" method="post">
-    <div>
-        <label for="n1">Nombre 1 :</label>
-        <input type="number" id="n1" name="nun">
+<% include partials/menu %>
+<div class="container-fluid bg-3 text-center">    
+  <h3><%= page %></h3><br>
+  <div class="row">
+    <div class="col-sm-4">
+      
+      
     </div>
-    <div>
-        <label for="n2">Nombre 2 :</label>
-        <input type="number" id="n2" name="n2">
+    <div class="col-sm-4"> 
+      <form action="form/add" method="POST">
+          <div class="form-group">
+            <input type="number" name="nun" placeholder="Nombre 1" class="form-control" autofocus required>
+          </div>
+          <div class="form-group">
+            <input type="number" name="n2" placeholder="Nombre 2" class="form-control">
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-rounded">
+            Additionner
+          </button>
+		</form>
+		<% if (addition) { %>
+				<p><%= addition %></p>
+		<% } %>
     </div>
-    <div>
-        <button type="submit">Additionner</button>
+    <div class="col-sm-4"> 
+      
     </div>
-</form>
+  </div>
+</div>
 </body>
+<% include partials/script %>
 </html>

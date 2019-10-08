@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+ <% include partials/head %> 
+</head>
+<body>
+<% include partials/menu %>
+<div class="container-fluid bg-3 text-center">    
+  <h3><%= page %></h3><br>
+  <div class="row">
+    <div class="col-sm-4">
+      
+      
+    </div>
+    <div class="col-sm-4"> 
+      <form action="calculatrice/add" method="POST">
+        <div class="form-group">
+          <input type="number" name="nombre1" placeholder="Nombre 1" class="form-control" autofocus required>
+        </div>
+        <div class="form-group">
+          <input type="number" name="nombre2" placeholder="Nombre 2" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="sel1">Opérateurs</label>
+            <select name="sel1" class="form-control" id="sel1">
+              <option value="-">-</option>
+              <option value="+">+</option>
+              <option value="*">*</option>
+              <option value="/">/</option>
+            </select>
+        </div>
+
+          <button type="submit" class="btn btn-primary btn-rounded">
+            Ajouter
+          </button>
+        </form>
+    </div>
+    <div class="col-sm-4"> 
+      
+    </div>
+  </div>
+</div>
+</body>
+<% include partials/script %>
+</html>
