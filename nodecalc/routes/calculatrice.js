@@ -6,6 +6,6 @@ const calculatriceController = require('../controllers/calculatriceController');
 /* GET calculatrice page. */
 router.get('/', calculatriceController.formulaire);
 router.post('/add', calculatriceController.save);
-router.get('/calculer/:id', calculatriceController.calculer);
+router.get('/update/:id', calculatriceController.edit);
 
 module.exports = router;
