@@ -80,11 +80,11 @@ controller.edit = (req, res) => {
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
     var dbo = db.db("calculatrice");
-    dbo.collection("param").find({}, { projection: { _id: req.params._id } }).toArray(function(err, result) {
+    dbo.collection("param").findOne({ _id: new ObjectId(req.params.id) }, function(err, result) {
       if (err) throw err;
       console.log(result);
       res.render("calculatrice_edit", {
-        page: result[0], menuId:'modifier'
+        page: result, menuId:'modifier'
       });
       db.close();
     });
@@ -92,27 +92,18 @@ controller.edit = (req, res) => {
 };
 
 controller.update = (req, res) => {
-  const { id } = req.params;
-  const newetats = req.body;
-
-  req.check("nom").isLength({ min: 3 });
-  req.check("description").isLength({ min: 3 });
-  const errors = req.validationErrors();
-  if (errors) {
-    console.log(errors);
-    req.flash("error", "Erreur");
-  } else {
-    req.getConnection((err, conn) => {
-      conn.query(
-        "UPDATE etats set ? where id = ?",
-        [newetats, id],
-        (err, rows) =>  {
-          req.flash("success", "Validé"); 
-          res.redirect("/admin/etat");
-        }
-      );
+  MongoClient.connect(url, function(err, db) {
+    if (err) throw err;
+    var dbo = db.db("calculatrice");
+    var myquery = req.params.id;
+    var newvalues = { $set: { "nombre1": req.body.nombre1, "nombre2": req.body.nombre2, "sel1": req.body.sel1 } };
+      dbo.collection("param").updateOne({ _id: new ObjectId(myquery) }, newvalues, function(err, result) {
+      if (err) throw err;
+      console.log(result);
+      res.redirect("/");
+      db.close();
     });
-  }
+  });
 };
 
 controller.delete = (req, res) => {

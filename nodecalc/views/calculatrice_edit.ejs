@@ -6,14 +6,13 @@
 <body>
 <% include partials/menu %>
 <div class="container-fluid bg-3 text-center">    
-  <h3><%= page %></h3><br>
   <div class="row">
     <div class="col-sm-4">
       
       
     </div>
     <div class="col-sm-4"> 
-      <form action="calculatrice/update/<%= page._id %>" method="POST">
+      <form action="/calculatrice/update/<%= page._id %>" method="POST">
         <div class="form-group">
           <input type="number" name="nombre1" value="<%= page.nombre1 %>" placeholder="Nombre 1" class="form-control" autofocus required>
         </div>
@@ -31,7 +30,7 @@
         </div>
 
           <button type="submit" class="btn btn-primary btn-rounded">
-            Ajouter
+            Modifier
           </button>
         </form>
     </div>
